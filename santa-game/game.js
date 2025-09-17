@@ -41,8 +41,9 @@ function resetPresent() {
   present.style.left = `${Math.floor(Math.random() * 700)}px`;
 }
 
-function movePresent() {
-  presentY += presentSpeed;
+function movePresent(delta) {
+  let normalizedSpeed = presentSpeed * (delta / 16.67); // Normalize to ~60fps
+  presentY += normalizedSpeed;
   present.style.top = `${presentY}px`;
 
   let santaRect = santa.getBoundingClientRect();
@@ -99,16 +100,20 @@ document.addEventListener("keyup", (e) => {
   keysHeld[e.code] = false;
 });
 
-function gameLoop() {
+let lastTime = performance.now();
+
+function gameLoop(currentTime) {
+  let delta = currentTime - lastTime;
+  lastTime = currentTime;
+
   if (gameActive) {
     presentSpeed = getPresentSpeed(presentCount);
     santaSpeed = getSantaSpeed(presentCount);
-    movePresent();
+    movePresent(delta);
     moveSanta();
   }
 
   requestAnimationFrame(gameLoop);
 }
-
 
 gameLoop();
