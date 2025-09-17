@@ -20,9 +20,9 @@ let keysHeld = {
 };
 
 function getPresentSpeed(count) {
-  if (count >= 75) return 23;
-  if (count >= 50) return 18;
-  if (count >= 30) return 13;
+  if (count >= 75) return 18;
+  if (count >= 50) return 14;
+  if (count >= 30) return 11;
   if (count >= 15) return 8;
   return 5;
 }
@@ -109,5 +109,6 @@ function gameLoop() {
 
   requestAnimationFrame(gameLoop);
 }
+
 
 gameLoop();
