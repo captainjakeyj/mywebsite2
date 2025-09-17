@@ -173,4 +173,23 @@
     }
   }
 
-  let
+    let lastTime = performance.now();
+
+  function loop(now) {
+    const dt = now - lastTime;
+    lastTime = now;
+
+    if (gameActive) {
+      moveSanta(dt);
+      movePresent(dt);
+    }
+
+    drawSnow();
+    requestAnimationFrame(loop);
+  }
+
+  syncSanta();
+  syncPresent();
+  requestAnimationFrame(loop);
+})();
+
