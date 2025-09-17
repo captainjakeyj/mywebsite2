@@ -19,6 +19,34 @@ let keysHeld = {
   ArrowRight: false
 };
 
+// 📱 Touch controls
+let touchStartX = null;
+
+document.addEventListener("touchstart", (e) => {
+  touchStartX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchmove", (e) => {
+  if (!gameActive) return;
+  let touchX = e.touches[0].clientX;
+  let deltaX = touchX - touchStartX;
+
+  if (Math.abs(deltaX) > 10) {
+    if (deltaX < 0) {
+      keysHeld["ArrowLeft"] = true;
+      keysHeld["ArrowRight"] = false;
+    } else {
+      keysHeld["ArrowRight"] = true;
+      keysHeld["ArrowLeft"] = false;
+    }
+  }
+});
+
+document.addEventListener("touchend", () => {
+  keysHeld["ArrowLeft"] = false;
+  keysHeld["ArrowRight"] = false;
+});
+
 function getPresentSpeed(count) {
   if (count >= 75) return 18;
   if (count >= 50) return 14;
