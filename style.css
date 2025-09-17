@@ -1,47 +1,167 @@
 @font-face {
-  font-family: 'ChristmasFont';
-  src: url('font/christmasfont.ttf') format('truetype');
+  font-family: "ChristmasFont";
+  src: url("font/christmasfont.ttf") format("truetype");
+  font-display: swap;
 }
+
+:root {
+  --w: 800px;
+  --h: 600px;
+  --touch-size: 74px;
+}
+
+* { box-sizing: border-box; }
 
 body {
-  font-family: 'ChristmasFont', sans-serif;
-  background-color: #f0f0f0;
-  color: #333;
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
+  margin: 0;
+  background: #000;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  font-family: "ChristmasFont", system-ui, sans-serif;
 }
 
-h1 {
-  color: crimson;
+.screen {
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+  overflow: hidden;
+  user-select: none;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  text-align: center;
+  z-index: 2;
+}
+
+.ui-line {
   font-size: 32px;
-  margin-bottom: 10px;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
 }
 
-p {
-  font-size: 18px;
-  line-height: 1.5;
-  margin: 10px 0;
+.hidden { display: none; }
+
+#game-area {
+  position: absolute;
+  inset: 0;
+  border: 10px solid white;
+  box-sizing: border-box;
+  z-index: 1;
+  overflow: visible;
 }
 
-a {
-  display: inline-block;
-  margin: 10px 0;
-  color: darkgreen;
-  font-weight: bold;
-  text-decoration: none;
+#score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 28px;
+  color: #000;
+  text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+  z-index: 6;
 }
 
-a:hover {
-  text-decoration: underline;
+#santa {
+  position: absolute;
+  width: 130px;
+  height: 150px;
+  left: calc(200px - 65px);
+  bottom: 60px;
+  background-image: url("images/santa.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 4;
 }
 
-img {
-  max-width: 100px;
-  vertical-align: middle;
+#santa::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 70px;
+  bottom: -40px;
+  background-image: url("images/santa.png");
+  background-size: 130px 150px;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 5;
 }
 
-audio, video {
-  display: block;
-  margin: 20px 0;
+#present {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 300px;
+  top: 0;
+  background-image: url("images/present.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 4;
+}
+
+#snow {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+#touch-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: var(--w);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+  z-index: 10;
+}
+
+.touch-btn {
+  width: var(--touch-size);
+  height: var(--touch-size);
+  border-radius: 12px;
+  border: none;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 28px;
+  display: grid;
+  place-items: center;
+  touch-action: none;
+  user-select: none;
+  backdrop-filter: blur(4px);
+}
+
+.touch-btn:active,
+.touch-btn.active {
+  background: rgba(255,255,255,0.24);
+}
+
+@media (max-width: 420px) {
+  :root { --touch-size: 60px; }
+  .ui-line { font-size: 28px; }
+  #score { font-size: 22px; }
 }
