@@ -1,4 +1,5 @@
 (() => {
+  // DOM elements
   const menuScreen = document.getElementById("menu-screen");
   const gameScreen = document.getElementById("game-screen");
   const startText = document.getElementById("start-text");
@@ -11,7 +12,6 @@
   const presentSound = document.getElementById("present-sound");
   const btnLeft = document.getElementById("btn-left");
   const btnRight = document.getElementById("btn-right");
-  const gameArea = document.getElementById("game-area");
 
   const WIDTH = 800;
   const HEIGHT = 600;
@@ -44,18 +44,12 @@
 
   // Keyboard input
   window.addEventListener("keydown", e => {
-    if (e.code === "ArrowLeft" || e.code === "ArrowRight") {
-      keys[e.code] = true;
-      e.preventDefault();
-    }
+    if (e.code === "ArrowLeft" || e.code === "ArrowRight") keys[e.code] = true;
     if (!gameActive && e.code === "Space") startGame();
   });
 
   window.addEventListener("keyup", e => {
-    if (e.code === "ArrowLeft" || e.code === "ArrowRight") {
-      keys[e.code] = false;
-      e.preventDefault();
-    }
+    if (e.code === "ArrowLeft" || e.code === "ArrowRight") keys[e.code] = false;
   });
 
   // Touch buttons
@@ -70,7 +64,7 @@
       keys[dir] = false;
       btn.classList.remove("active");
     });
-    btn.addEventListener("pointerleave", e => {
+    btn.addEventListener("pointerleave", () => {
       keys[dir] = false;
       btn.classList.remove("active");
     });
@@ -79,7 +73,7 @@
   bindButton(btnLeft, "ArrowLeft");
   bindButton(btnRight, "ArrowRight");
 
-  // Tap to start
+  // Start game
   menuScreen.addEventListener("pointerdown", () => startGame());
   startText.addEventListener("pointerdown", () => startGame());
 
@@ -101,16 +95,19 @@
     syncPresent();
   }
 
-  function moveSanta() {
+  function moveSanta(dt) {
     const speed = getSantaSpeed(presents);
-    if (keys.ArrowLeft)  santa.x -= speed;
-    if (keys.ArrowRight) santa.x += speed;
+    const scaled = speed * (dt / 16.67);
+    if (keys.ArrowLeft)  santa.x -= scaled;
+    if (keys.ArrowRight) santa.x += scaled;
     santa.x = clamp(santa.x, 1, WIDTH - santa.w - 1);
     syncSanta();
   }
 
-  function movePresent() {
-    present.y += getPresentSpeed(presents);
+  function movePresent(dt) {
+    const speed = getPresentSpeed(presents);
+    const scaled = speed * (dt / 16.67);
+    present.y += scaled;
     syncPresent();
 
     if (rectsOverlap(santa, present)) {
@@ -179,21 +176,16 @@
     }
   }
 
-  // 🧊 Frame limiter: cap at 60fps
-  let lastFrameTime = 0;
-  const FRAME_DURATION = 1000 / 60;
+  // Frame-rate normalized loop
+  let lastTime = performance.now();
 
-  function loop(timestamp) {
-    const delta = timestamp - lastFrameTime;
-    if (delta < FRAME_DURATION) {
-      requestAnimationFrame(loop);
-      return;
-    }
-    lastFrameTime = timestamp;
+  function loop(now) {
+    const dt = now - lastTime;
+    lastTime = now;
 
     if (gameActive) {
-      moveSanta();
-      movePresent();
+      moveSanta(dt);
+      movePresent(dt);
     }
 
     drawSnow();
