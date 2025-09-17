@@ -1,5 +1,4 @@
 (() => {
-  // DOM elements
   const menuScreen = document.getElementById("menu-screen");
   const gameScreen = document.getElementById("game-screen");
   const startText = document.getElementById("start-text");
@@ -42,7 +41,6 @@
 
   const keys = { ArrowLeft: false, ArrowRight: false };
 
-  // Keyboard input
   window.addEventListener("keydown", e => {
     if (e.code === "ArrowLeft" || e.code === "ArrowRight") keys[e.code] = true;
     if (!gameActive && e.code === "Space") startGame();
@@ -52,7 +50,6 @@
     if (e.code === "ArrowLeft" || e.code === "ArrowRight") keys[e.code] = false;
   });
 
-  // Touch buttons
   function bindButton(btn, dir) {
     btn.addEventListener("pointerdown", e => {
       e.preventDefault();
@@ -73,9 +70,10 @@
   bindButton(btnLeft, "ArrowLeft");
   bindButton(btnRight, "ArrowRight");
 
-  // Start game
-  menuScreen.addEventListener("pointerdown", () => startGame());
-  startText.addEventListener("pointerdown", () => startGame());
+  // Tap anywhere to start
+  menuScreen.addEventListener("pointerdown", () => {
+    if (!gameActive) startGame();
+  });
 
   function startGame() {
     gameActive = true;
@@ -144,7 +142,6 @@
            a.y + a.h > b.y;
   }
 
-  // Snow
   const snow = {
     ctx: snowCanvas.getContext("2d"),
     flakes: Array.from({ length: 120 }, () => newFlake())
@@ -176,23 +173,4 @@
     }
   }
 
-  // Frame-rate normalized loop
-  let lastTime = performance.now();
-
-  function loop(now) {
-    const dt = now - lastTime;
-    lastTime = now;
-
-    if (gameActive) {
-      moveSanta(dt);
-      movePresent(dt);
-    }
-
-    drawSnow();
-    requestAnimationFrame(loop);
-  }
-
-  syncSanta();
-  syncPresent();
-  requestAnimationFrame(loop);
-})();
+  let
