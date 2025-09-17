@@ -7,38 +7,33 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body tabindex="0">
-  <!-- Menu screen -->
   <div id="menu-screen" class="screen">
-    <img id="menu-bg" class="bg" src="images/santasgrotto.png" alt="Santa's Grotto" />
+    <img class="bg" src="images/santasgrotto.png" alt="Santa's Grotto" />
     <div class="overlay">
       <div id="start-text" class="ui-line">PRESS SPACE OR TAP TO START</div>
       <div id="final-score" class="ui-line hidden">FINAL PRESENTS CAUGHT: 0</div>
     </div>
   </div>
 
-  <!-- Game screen -->
   <div id="game-screen" class="screen hidden">
-    <img id="game-bg" class="bg" src="images/northpole.png" alt="North Pole" />
-    <canvas id="snow" width="800" height="600" aria-hidden="true"></canvas>
+    <img class="bg" src="images/northpole.png" alt="North Pole" />
+    <canvas id="snow" width="800" height="600"></canvas>
 
-    <div id="game-area" role="application" aria-label="Santa catches presents">
-      <div id="santa" aria-hidden="true"></div>
-      <div id="present" aria-hidden="true"></div>
+    <div id="game-area">
+      <div id="santa"></div>
+      <div id="present"></div>
       <div id="score" class="ui-line">PRESENTS: 0</div>
     </div>
 
-    <!-- Mobile controls -->
     <div id="touch-controls">
-      <button id="btn-left" class="touch-btn" aria-label="Move left">◀</button>
-      <button id="btn-right" class="touch-btn" aria-label="Move right">▶</button>
+      <button id="btn-left" class="touch-btn">◀</button>
+      <button id="btn-right" class="touch-btn">▶</button>
     </div>
   </div>
 
-  <!-- Audio -->
   <audio id="bg-music" src="sounds/jinglebellsjazz.ogg" loop></audio>
   <audio id="present-sound" src="sounds/presentcaught.ogg"></audio>
 
-  <!-- Game logic -->
   <script src="game.js"></script>
 </body>
 </html>
