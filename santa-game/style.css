@@ -1,16 +1,8 @@
-@font-face {
-  font-family: "ChristmasFont";
-  src: url("font/christmasfont.ttf") format("truetype");
-  font-display: swap;
-}
-
 :root {
   --w: 800px;
   --h: 600px;
   --touch-size: 74px;
 }
-
-* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -18,7 +10,7 @@ body {
   display: grid;
   place-items: center;
   min-height: 100vh;
-  font-family: "ChristmasFont", system-ui, sans-serif;
+  font-family: sans-serif;
 }
 
 .screen {
@@ -131,13 +123,15 @@ body {
   bottom: 20px;
   left: 0;
   right: 0;
-  display: flex;
-  justify-content: center;
-  gap: 18px;
+  width: 100%;
+  height: var(--touch-size);
   z-index: 10;
 }
 
-.touch-btn {
+#btn-left,
+#btn-right {
+  position: absolute;
+  bottom: 0;
   width: var(--touch-size);
   height: var(--touch-size);
   border-radius: 12px;
@@ -150,6 +144,14 @@ body {
   touch-action: none;
   user-select: none;
   backdrop-filter: blur(4px);
+}
+
+#btn-left {
+  left: 12px;
+}
+
+#btn-right {
+  right: 12px;
 }
 
 .touch-btn:active,
