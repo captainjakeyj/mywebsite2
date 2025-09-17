@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Santa catches presents</title>
+  <title>Santa Catches Presents</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body tabindex="0">
   <!-- Menu screen -->
   <div id="menu-screen" class="screen">
     <img id="menu-bg" class="bg" src="images/santasgrotto.png" alt="Santa's Grotto" />
     <div class="overlay">
-      <div id="start-text" class="ui-line">PRESS SPACE OR TAP SCREEN TO START</div>
+      <div id="start-text" class="ui-line">PRESS SPACE OR TAP TO START</div>
       <div id="final-score" class="ui-line hidden">FINAL PRESENTS CAUGHT: 0</div>
     </div>
   </div>
@@ -28,16 +28,17 @@
     </div>
 
     <!-- Mobile controls -->
-    <div id="touch-controls" aria-hidden="false">
+    <div id="touch-controls">
       <button id="btn-left" class="touch-btn" aria-label="Move left">◀</button>
       <button id="btn-right" class="touch-btn" aria-label="Move right">▶</button>
-      <div id="touch-joystick" aria-hidden="true"></div>
     </div>
   </div>
 
+  <!-- Audio -->
   <audio id="bg-music" src="sounds/jinglebellsjazz.ogg" loop></audio>
   <audio id="present-sound" src="sounds/presentcaught.ogg"></audio>
 
+  <!-- Game logic -->
   <script src="game.js"></script>
 </body>
 </html>
