@@ -19,11 +19,8 @@ body {
   place-items: center;
   min-height: 100vh;
   font-family: "ChristmasFont", system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Screens */
 .screen {
   position: relative;
   width: var(--w);
@@ -32,7 +29,6 @@ body {
   user-select: none;
 }
 
-/* Backgrounds */
 .bg {
   position: absolute;
   inset: 0;
@@ -79,7 +75,6 @@ body {
   z-index: 6;
 }
 
-/* Santa (130x150) and legs pseudo */
 #santa {
   position: absolute;
   width: 130px;
@@ -131,57 +126,39 @@ body {
   pointer-events: none;
 }
 
-/* Touch controls container (visible on small screens, but harmless on desktop) */
 #touch-controls {
   position: absolute;
-  inset: auto 0 20px 0;
-  height: var(--touch-size);
+  bottom: 20px;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
   gap: 18px;
-  pointer-events: auto;
   z-index: 10;
-  width: 100%;
-  max-width: var(--w);
-  margin: 0 auto;
-  box-sizing: border-box;
-  transform-origin: center bottom;
 }
 
 .touch-btn {
   width: var(--touch-size);
   height: var(--touch-size);
   border-radius: 12px;
-  border: 0;
+  border: none;
   background: rgba(255,255,255,0.12);
   color: #fff;
   font-size: 28px;
   display: grid;
   place-items: center;
-  -webkit-tap-highlight-color: transparent;
   touch-action: none;
   user-select: none;
-  transition: background 120ms ease;
   backdrop-filter: blur(4px);
 }
 
-/* Active state */
 .touch-btn:active,
 .touch-btn.active {
   background: rgba(255,255,255,0.24);
 }
 
-/* Joystick area (hidden by default, used if we want drag anywhere) */
-#touch-joystick {
-  display: none;
-}
-
-/* Make touch controls smaller on very small screens */
 @media (max-width: 420px) {
   :root { --touch-size: 60px; }
   .ui-line { font-size: 28px; }
   #score { font-size: 22px; }
 }
-
-/* Keep layering consistent */
-#game-area, #score, #santa, #present { z-index: 6; }
