@@ -1,0 +1,67 @@
+@font-face {
+  font-family: 'ChristmasFont';
+  src: url('font/christmasfont.ttf') format('truetype');
+}
+
+body {
+  margin: 0;
+  background: #000;
+  font-family: 'ChristmasFont', sans-serif;
+}
+
+#game {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  margin: auto;
+  background: url('images/northpole.png') no-repeat center/cover;
+  overflow: hidden;
+}
+
+#santa {
+  position: absolute;
+  bottom: 0;
+  left: 200px;
+  width: 200px;
+  height: 200px;
+  background: url('images/santa.png') no-repeat center/contain;
+}
+
+#present {
+  position: absolute;
+  top: 0;
+  left: 300px;
+  width: 100px;
+  height: 100px;
+  background: url('images/present.png') no-repeat center/contain;
+}
+
+#score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 24px;
+}
+
+#final-score {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 32px;
+}
+
+.hidden {
+  display: none;
+}
+
+#start-text {
+  position: absolute;
+  bottom: 300px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  color: black;
+}

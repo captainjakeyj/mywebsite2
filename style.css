@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'ChristmasFont';
+  src: url('font/christmasfont.ttf') format('truetype');
+}
+
+body {
+  font-family: 'ChristmasFont', sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+h1 {
+  color: crimson;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.5;
+  margin: 10px 0;
+}
+
+a {
+  display: inline-block;
+  margin: 10px 0;
+  color: darkgreen;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100px;
+  vertical-align: middle;
+}
+
+audio, video {
+  display: block;
+  margin: 20px 0;
+}
